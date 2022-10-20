@@ -8,6 +8,7 @@ import android.os.Looper
 import android.view.WindowManager
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.example.eserciziologin.auth.AuthActivity
 
 @Suppress("DEPRECATION")
 class SplashScreen : AppCompatActivity() {
@@ -26,9 +27,9 @@ class SplashScreen : AppCompatActivity() {
         Glide.with(this).load(R.drawable.xosx).into(imageView)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
             finish()
-        }, 6000)
+        }, 1000)
     }
 }

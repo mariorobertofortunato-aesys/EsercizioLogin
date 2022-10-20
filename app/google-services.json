@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "506460552973",
+    "project_id": "eserciziologin-1666190483482",
+    "storage_bucket": "eserciziologin-1666190483482.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506460552973:android:fea19e109382bc63c6fa44",
+        "android_client_info": {
+          "package_name": "com.example.eserciziologin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506460552973-bc2pr0f622c2ip4sc6rniq6rq9iit9q7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eserciziologin",
+            "certificate_hash": "e7f0be24e2a7254a1aff3e67d21c3bb6c15e746d"
+          }
+        },
+        {
+          "client_id": "506460552973-f0bcmif931qmic3t0ar0vge0kgfufr42.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUev9b6E3a9OTGvR50UufAwxWNiu6nYGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506460552973-f0bcmif931qmic3t0ar0vge0kgfufr42.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/infoFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="@string/info"
+        app:itemIconTint="@color/white"/>
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/home"
+        app:itemIconTint="@color/white"/>
+    <item
+        android:id="@+id/filterFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_filter_24"
+        android:title="@string/filter"
+        app:itemIconTint="@color/white"/>
+
+</menu>
