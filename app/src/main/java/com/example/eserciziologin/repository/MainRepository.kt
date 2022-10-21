@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 class MainRepository @Inject constructor (private val databaseRepository: DBRepository, private val networkRepository: NetworkRepository) {
 
+    /** COMUNI */
     suspend fun getListaComuni(): List<Comune> {
         return databaseRepository.getAll().asDomainModel()
     }
@@ -17,8 +18,7 @@ class MainRepository @Inject constructor (private val databaseRepository: DBRepo
         return databaseRepository.getComune(nome).asDomainModel()
     }
 
-
-    suspend fun refreshComuniDB() {
+    suspend fun refreshComuniInDB() {
         try {
             val networkRensponse = networkRepository.getAll()
             val comuniFromNetwork = parseComuniJsonResult(networkRensponse)
@@ -26,8 +26,28 @@ class MainRepository @Inject constructor (private val databaseRepository: DBRepo
         } catch (e: Exception) {
         }
     }
+
+    /** PROVINCE */
+    suspend fun getProvince() : MutableList<String> {
+        return databaseRepository.getProvince()
+    }
+    suspend fun getComuniFromProvincia(provinciaSelected: String) : List<Comune> {
+        return databaseRepository.getComuniFromProvincia(provinciaSelected).asDomainModel()
+    }
+
+    /** REGIONI */
+    suspend fun getRegioni() : MutableList<String> {
+        return databaseRepository.getRegioni()
+    }
+    suspend fun getComuniFromRegione(regioneSelected: String) : List<Comune> {
+        return databaseRepository.getComuniFromRegione(regioneSelected).asDomainModel()
+    }
 }
 
+
+
+
+/** UTILS */
     fun parseComuniJsonResult(jsonResult: String) : ArrayList<Comune> {
 
         val comuniList = ArrayList<Comune>()

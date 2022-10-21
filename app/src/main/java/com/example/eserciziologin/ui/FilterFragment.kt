@@ -1,62 +1,78 @@
 package com.example.eserciziologin.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.example.eserciziologin.R
+import com.example.eserciziologin.databinding.FragmentFilterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FilterFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 @AndroidEntryPoint
 class FilterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentFilterBinding
+    private val viewModel by viewModels<ViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_filter, container, false)
+        binding = DataBindingUtil.inflate(layoutInflater,R.layout.fragment_filter,container,false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FilterFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FilterFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        // TODO funziona solo la seconda volta che si accede??
+        val menuProvincieAdapter = ArrayAdapter(requireContext(),R.layout.list_item_edit_text,viewModel.listaProvince)
+        binding.autoCompleteTextViewProvincia.setAdapter(menuProvincieAdapter)
+        val menuRegioniAdapter = ArrayAdapter(requireContext(),R.layout.list_item_edit_text,viewModel.listaRegioni)
+        binding.autoCompleteTextViewRegione.setAdapter(menuRegioniAdapter)
+
+
+        // TODO a parte che non funziona, i filtri andrebbero applicati solo dopo il button press
+        binding.autoCompleteTextViewProvincia.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+                viewModel.getComuniFromProvincia()
+
+                //HideKeyboard
+                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+
+                return@OnEditorActionListener true
             }
+            false
+        })
+
+        binding.autoCompleteTextViewRegione.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+
+                viewModel.getComuniFromRegione()
+
+                //HideKeyboard
+                val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+
+                return@OnEditorActionListener true
+            }
+            false
+        })
+
+
+
+
     }
 }

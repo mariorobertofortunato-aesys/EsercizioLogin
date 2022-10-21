@@ -12,4 +12,11 @@ class DBRepository @Inject constructor(private val database: ComuneRoomDatabase)
 
     suspend fun getComune(nome: String) = database.dao.getComune(nome)
 
+    suspend fun getProvince(): MutableList<String> = database.dao.getProvince()
+
+    suspend fun getRegioni(): MutableList<String> = database.dao.getRegioni()
+
+    suspend fun getComuniFromProvincia(provinciaSelected: String) = database.dao.getComuniFromProvincia(provinciaSelected)
+
+    suspend fun getComuniFromRegione(regioneSelected: String) = database.dao.getComuniFromRegione(regioneSelected)
 }

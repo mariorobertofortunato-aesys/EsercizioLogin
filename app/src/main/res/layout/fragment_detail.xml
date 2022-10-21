@@ -1,14 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DetailFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="comune"
+            type="com.example.eserciziologin.model.Comune" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="DETAIL FRAG" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{comune.nome}"/>
+        <TextView
+            android:id="@+id/istat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nome"
+            app:layout_constraintBottom_toTopOf="@+id/zona"
+            android:text="@{comune.istat}"/>
+        <TextView
+            android:id="@+id/zona"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/istat"
+            app:layout_constraintBottom_toTopOf="@+id/regione"
+            android:text="@{comune.zonaNome}"/>
+        <TextView
+            android:id="@+id/regione"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/zona"
+            app:layout_constraintBottom_toTopOf="@+id/provincia"
+            android:text="@{comune.regioneNome}"/>
+        <TextView
+            android:id="@+id/provincia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/regione"
+            app:layout_constraintBottom_toTopOf="@+id/sigla"
+            android:text="@{comune.provinciaNome}"/>
+        <TextView
+            android:id="@+id/sigla"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/provincia"
+            app:layout_constraintBottom_toTopOf="@+id/codice_catastale"
+            android:text="@{comune.sigla}"/>
+        <TextView
+            android:id="@+id/codice_catastale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sigla"
+            app:layout_constraintBottom_toTopOf="@+id/cap"
+            android:text="@{comune.codiceCatastale}"/>
+        <TextView
+            android:id="@+id/cap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/codice_catastale"
+            app:layout_constraintBottom_toTopOf="@+id/popolazione"
+            android:text="@{comune.cap}"/>
+        <TextView
+            android:id="@+id/popolazione"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cap"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{Integer.toString(comune.popolazione)}"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

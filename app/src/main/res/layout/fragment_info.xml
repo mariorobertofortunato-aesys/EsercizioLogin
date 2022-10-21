@@ -9,6 +9,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="INFO FRAG" />
+        android:text="Questa App consente di bla bla bla bla \n i dati sono presi da bla bla bla bla bla" />
 
 </FrameLayout>
