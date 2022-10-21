@@ -72,7 +72,7 @@ class ViewModel @Inject constructor(private val mainRepository: MainRepository) 
         val searchList = mutableListOf<Comune>()
 
         for (element in listaComuniFromDB ) {
-            if ((element.nome).lowercase().startsWith(searchString.lowercase())) {
+            if ((element.nome).lowercase().contains(searchString.lowercase())) {
                 searchList.add(element)
             }
         }
