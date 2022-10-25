@@ -12,9 +12,8 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".FilterFragment">
+        tools:context=".FilterFragment"
+        tools:showIn="@layout/fragment_home" android:layout_height="0dp" android:layout_width="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/menu_regione"
@@ -58,15 +57,13 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/apply_btn"
+        <TextView
+            android:id="@+id/error_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/menu_provincia"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="APPLICA FILTRI"/>
-
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

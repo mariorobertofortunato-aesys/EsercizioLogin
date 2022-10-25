@@ -10,14 +10,6 @@ import javax.inject.Inject
 class MainRepository @Inject constructor (private val databaseRepository: DBRepository, private val networkRepository: NetworkRepository) {
 
     /** COMUNI */
-    suspend fun getListaComuni(): List<Comune> {
-        return databaseRepository.getAll().asDomainModel()
-    }
-
-    suspend fun getComune(nome: String): Comune {
-        return databaseRepository.getComune(nome).asDomainModel()
-    }
-
     suspend fun refreshComuniInDB() {
         try {
             val networkRensponse = networkRepository.getAll()
@@ -26,22 +18,34 @@ class MainRepository @Inject constructor (private val databaseRepository: DBRepo
         } catch (e: Exception) {
         }
     }
-
-    /** PROVINCE */
-    suspend fun getProvince() : MutableList<String> {
-        return databaseRepository.getProvince()
+    suspend fun getListaComuni(): List<Comune> {
+        return databaseRepository.getAll().asDomainModel()
+    }
+    suspend fun getComune(nome: String): Comune {
+        return databaseRepository.getComune(nome).asDomainModel()
     }
     suspend fun getComuniFromProvincia(provinciaSelected: String) : List<Comune> {
         return databaseRepository.getComuniFromProvincia(provinciaSelected).asDomainModel()
     }
-
-    /** REGIONI */
-    suspend fun getRegioni() : MutableList<String> {
-        return databaseRepository.getRegioni()
-    }
     suspend fun getComuniFromRegione(regioneSelected: String) : List<Comune> {
         return databaseRepository.getComuniFromRegione(regioneSelected).asDomainModel()
     }
+
+
+
+    /** PROVINCE */
+    suspend fun getProvince() : List<String> {
+        return databaseRepository.getProvince()
+    }
+    suspend fun getProvinceFromRegione(regioneSelected: String) : List<String> {
+        return databaseRepository.getProvinceFromRegione(regioneSelected)
+    }
+
+    /** REGIONI */
+    suspend fun getRegioni() : List<String> {
+        return databaseRepository.getRegioni()
+    }
+
 }
 
 

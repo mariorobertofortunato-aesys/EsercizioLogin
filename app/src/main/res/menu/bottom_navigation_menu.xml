@@ -14,7 +14,7 @@
         android:title="@string/home"
         app:itemIconTint="@color/white"/>
     <item
-        android:id="@+id/filterFragment"
+        android:id="@+id/filterFragmentNav"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_filter_24"
         android:title="@string/filter"
