@@ -14,11 +14,11 @@
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_infoFragment"
-            app:destination="@id/infoFragment" />
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_filterFragment2"
-            app:destination="@id/filterFragment" />
+            android:id="@+id/action_homeFragment_to_checklistFragment"
+            app:destination="@id/checklistFragment" />
 
 
     </fragment>
@@ -36,17 +36,21 @@
         />
     </fragment>
     <fragment
-        android:id="@+id/infoFragment"
-        android:name="com.example.eserciziologin.ui.InfoFragment"
-        android:label="fragment_info"
-        tools:layout="@layout/fragment_info" >
+        android:id="@+id/accountFragment"
+        android:name="com.example.eserciziologin.ui.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account">
         <action
-            android:id="@+id/action_infoFragment_to_homeFragment"
+            android:id="@+id/action_accountFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/filterFragment"
-        android:name="com.example.eserciziologin.ui.FilterFragment"
-        android:label="fragment_filter" />
+        android:id="@+id/checklistFragment"
+        android:name="com.example.eserciziologin.ui.ChecklistFragment"
+        android:label="fragment_checklist" >
+        <action
+            android:id="@+id/action_checklistFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
 </navigation>

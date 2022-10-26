@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:hint="Cerca Comune"
-                app:boxStrokeColor="@color/black"
+                app:boxStrokeColor="@color/primaryColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

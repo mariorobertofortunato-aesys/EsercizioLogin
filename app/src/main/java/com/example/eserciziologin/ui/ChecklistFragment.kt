@@ -13,22 +13,20 @@ import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.example.eserciziologin.R
-import com.example.eserciziologin.databinding.FragmentFilterBinding
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.example.eserciziologin.databinding.FragmentChecklistBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FilterFragment : Fragment() {
+class ChecklistFragment : Fragment() {
 
-    private lateinit var binding: FragmentFilterBinding
+    private lateinit var binding: FragmentChecklistBinding
     private val viewModel by viewModels<ViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(layoutInflater,R.layout.fragment_filter,container,false)
+        binding = DataBindingUtil.inflate(layoutInflater,R.layout.fragment_checklist,container,false)
         return binding.root
     }
 

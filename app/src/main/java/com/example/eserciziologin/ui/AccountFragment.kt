@@ -9,7 +9,7 @@ import com.example.eserciziologin.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class InfoFragment : Fragment() {
+class AccountFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -24,7 +24,7 @@ class InfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_info, container, false)
+        return inflater.inflate(R.layout.fragment_account, container, false)
     }
 
 

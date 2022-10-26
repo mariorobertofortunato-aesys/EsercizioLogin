@@ -1,12 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--Card Style-->
+    <!-- Card Style -->
     <style name="CardViewStyle" parent="CardView">
-        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_margin">16dp</item>
         <item name="cardCornerRadius">8dp</item>
         <item name="cardElevation">8dp</item>
-        <item name="cardBackgroundColor">@color/card_view_color</item>
+        <item name="cardBackgroundColor">@color/surfaceColor</item>
+        <item name="strokeColor">@color/primaryLightColor</item>
+        <item name="strokeWidth">1dp</item>
     </style>
+
+    <!-- Headline Huge -->
+    <style name="HeadlineHuge" parent="@style/Overline">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:spacing">0.1dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <!-- Headline Big -->
+    <style name="HeadlineBig" parent="@style/Overline">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:spacing">0.1dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <!-- Headline Small -->
+    <style name="HeadlineSmall" parent="@style/Overline">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <!-- Headline Small On Primary -->
+    <style name="HeadlineSmallOnPrimary" parent="@style/Overline">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <!-- Mail e User (con lowercase) -->
+    <style name="Body" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryLightColor</item>
+
+    </style>
+
+    <!-- Caption -->
+    <style name="Caption" parent="@style/Overline">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Caption On Primary -->
+    <style name="CaptionOnPrimary" parent="@style/Overline">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <!-- Overline -->
+    <style name="Overline" parent="@style/TextAppearance.MaterialComponents.Overline">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+
+
 
 </resources>

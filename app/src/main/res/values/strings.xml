@@ -15,4 +15,6 @@
     <string name="home">Home</string>
     <string name="filter">Filter</string>
     <string name="info">Info</string>
+    <string name="account">Account</string>
+    <string name="checklist">Checklist</string>
 </resources>
