@@ -39,10 +39,6 @@ class ChecklistFragment : Fragment() {
         viewModel.getProvince()
         viewModel.getRegioni()
 
-/*        val adapter = ComuniAdapter(ComuniAdapter.OnClickListener {
-            findNavController().navigate(FilterFragmentDirections.actionFilterFragmentToDetailFragment(it))
-        })
-        binding.recyclerViewFilter.adapter = adapter*/
 
         /** OBSERVERS */
         viewModel.listaProvince.observe(viewLifecycleOwner) {
@@ -55,9 +51,6 @@ class ChecklistFragment : Fragment() {
             binding.autoCompleteTextViewRegione.setAdapter(menuRegioniAdapter)
         }
 
-/*        viewModel.listaComuni.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }*/
 
 
         /** LISTENERS */

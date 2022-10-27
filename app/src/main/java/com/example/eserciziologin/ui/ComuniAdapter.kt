@@ -15,7 +15,8 @@ class ComuniAdapter(private val clickListener: OnClickListener) :
     ListAdapter<Comune, ComuniAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_recycler_view, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_item_recycler_view, parent, false)
         return ViewHolder(view)
     }
 
@@ -27,13 +28,12 @@ class ComuniAdapter(private val clickListener: OnClickListener) :
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nomeComune: TextView = itemView.findViewById(R.id.nome_comune)
-        //TODO eventualmente bindare altre info
-        //TODO btn per vedere dettagli comune? o tutto l'item naviga a detail? nel secondo caso mi serve il clicklistener altrimenti no
+        private val itemText: TextView = itemView.findViewById(R.id.item_text)
         fun bind(comune: Comune) {
-            nomeComune.text = comune.nome
+            itemText.text = comune.nome
         }
     }
+
 
     object DiffCallback : DiffUtil.ItemCallback<Comune>() {
         override fun areItemsTheSame(oldItem: Comune, newItem: Comune): Boolean {

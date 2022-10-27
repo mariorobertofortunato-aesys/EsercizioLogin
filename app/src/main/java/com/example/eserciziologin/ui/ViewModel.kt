@@ -20,16 +20,17 @@ class ViewModel @Inject constructor(private val mainRepository: MainRepository) 
 
     // Comuni
     var listaComuniFromDB = listOf<Comune>()
-
     private var _listaComuni = MutableLiveData<ArrayList<Comune>>()
     val listaComuni: LiveData<ArrayList<Comune>> get() = _listaComuni
 
     // Province
+    var listaProvinceFromDB = listOf<String>()
     private var _listaProvince = MutableLiveData<ArrayList<String>>()
     val listaProvince: LiveData<ArrayList<String>> get() = _listaProvince
     var provinciaSelected = String()
 
     // Regioni
+    var listaRegioniFromDB = listOf<String>()
     private var _listaRegioni = MutableLiveData<ArrayList<String>>()
     val listaRegioni: LiveData<ArrayList<String>> get() = _listaRegioni
     var regioneSelected = String()
@@ -37,9 +38,11 @@ class ViewModel @Inject constructor(private val mainRepository: MainRepository) 
 
     init {
         viewModelScope.launch {
+
             refreshComuni()
             loadComuni()
-            Log.d("TAg", "$listaComuniFromDB")
+            getRegioni()
+            getProvince()
             }
 
     }
@@ -102,14 +105,14 @@ class ViewModel @Inject constructor(private val mainRepository: MainRepository) 
     /** PROVINCE */
     fun getProvince() {
         viewModelScope.launch {
-                val listaProvinceFromDB = mainRepository.getProvince()
+                listaProvinceFromDB = mainRepository.getProvince()
                 _listaProvince.value = ArrayList(listaProvinceFromDB)
         }
     }
 
     fun getProvinceFromRegione() {
         viewModelScope.launch {
-                val listaProvinceFromDB = mainRepository.getProvinceFromRegione(regioneSelected)
+                listaProvinceFromDB = mainRepository.getProvinceFromRegione(regioneSelected)
                 _listaProvince.value = ArrayList(listaProvinceFromDB)
         }
     }
@@ -118,8 +121,8 @@ class ViewModel @Inject constructor(private val mainRepository: MainRepository) 
     /** REGIONI */
     fun getRegioni() {
         viewModelScope.launch {
-            val listaRegioniFromBD = mainRepository.getRegioni()
-            _listaRegioni.value = ArrayList(listaRegioniFromBD)
+            listaRegioniFromDB = mainRepository.getRegioni()
+            _listaRegioni.value = ArrayList(listaRegioniFromDB)
         }
     }
 
