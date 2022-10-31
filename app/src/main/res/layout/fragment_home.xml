@@ -90,38 +90,43 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/cerca"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
+                style="@style/TextInputLayoutAppearance"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/ic_baseline_search_24"
+                app:startIconTint="@color/secondaryTextColor"
                 android:layout_margin="4dp"
-                android:hint="Cerca Comune"
-                app:boxStrokeColor="@color/primaryColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:paddingBottom="8dp"
-                >
+                android:textColorHint="@color/fui_transparent"
+                app:hintTextColor="@color/fui_transparent"
+                app:hintAnimationEnabled="false"
+                android:hint="CERCA"
+                android:textAppearance="@style/Overline"
+                android:textAllCaps="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/search_edit"
+                    style="@style/TextInputLayoutAppearance"
+                    android:background="@drawable/rounded_cerca_edit_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAppearance="@style/Overline"
+                    android:textSize="14sp"
+                    android:textColor="@color/secondaryTextColor"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:singleLine="true" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:singleLine="true"
+                    android:textColorHint="@color/secondaryLightColor"
+                    android:hint="Cerca"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@color/secondaryTextColor"
+                    android:layout_marginBottom="8dp"
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/search_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:text="CERCA"
-                android:contentDescription="CERCA"
-                android:layout_marginBottom="16dp"
-                app:icon="@drawable/ic_baseline_search_24"/>
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
 

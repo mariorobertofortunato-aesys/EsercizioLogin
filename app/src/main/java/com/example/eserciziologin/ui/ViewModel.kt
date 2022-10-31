@@ -38,12 +38,11 @@ class ViewModel @Inject constructor(private val mainRepository: MainRepository) 
 
     init {
         viewModelScope.launch {
-
             refreshComuni()
             loadComuni()
             getRegioni()
             getProvince()
-            }
+        }
 
     }
 
@@ -59,10 +58,12 @@ class ViewModel @Inject constructor(private val mainRepository: MainRepository) 
         }
     }
 
-    private suspend fun loadComuni() {
-        // Load (from refreshed DB)
-        listaComuniFromDB = mainRepository.getListaComuni()
-        _listaComuni.value = ArrayList(listaComuniFromDB)
+    fun loadComuni() {
+        viewModelScope.launch {
+            // Load (from refreshed DB)
+            listaComuniFromDB = mainRepository.getListaComuni()
+            _listaComuni.value = listaComuniFromDB as ArrayList<Comune>
+        }
     }
 
     fun getComuneFromDB(comune: String): Comune {
@@ -90,30 +91,30 @@ class ViewModel @Inject constructor(private val mainRepository: MainRepository) 
 
     fun getComuniFromProvincia() {
         viewModelScope.launch {
-                val listaComuniFromDB = mainRepository.getComuniFromProvincia(provinciaSelected)
-                _listaComuni.value = ArrayList(listaComuniFromDB)
+            listaComuniFromDB = mainRepository.getComuniFromProvincia(provinciaSelected)
+            _listaComuni.value = ArrayList(listaComuniFromDB)
         }
     }
 
     fun getComuniFromRegione() {
         viewModelScope.launch {
-                val listaComuniFromDB = mainRepository.getComuniFromRegione(regioneSelected)
-                _listaComuni.value = ArrayList(listaComuniFromDB)
+            listaComuniFromDB = mainRepository.getComuniFromRegione(regioneSelected)
+            _listaComuni.value = ArrayList(listaComuniFromDB)
         }
     }
 
     /** PROVINCE */
     fun getProvince() {
         viewModelScope.launch {
-                listaProvinceFromDB = mainRepository.getProvince()
-                _listaProvince.value = ArrayList(listaProvinceFromDB)
+            listaProvinceFromDB = mainRepository.getProvince()
+            _listaProvince.value = ArrayList(listaProvinceFromDB)
         }
     }
 
     fun getProvinceFromRegione() {
         viewModelScope.launch {
-                listaProvinceFromDB = mainRepository.getProvinceFromRegione(regioneSelected)
-                _listaProvince.value = ArrayList(listaProvinceFromDB)
+            listaProvinceFromDB = mainRepository.getProvinceFromRegione(regioneSelected)
+            _listaProvince.value = ArrayList(listaProvinceFromDB)
         }
     }
 

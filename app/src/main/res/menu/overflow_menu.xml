@@ -8,5 +8,7 @@
         <menu>
         </menu>
     </item>
+    <item android:id="@+id/reset" android:title="Resetta Filtri">
+    </item>
 
 </menu>

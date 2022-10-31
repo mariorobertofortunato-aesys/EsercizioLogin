@@ -3,7 +3,7 @@ package com.example.eserciziologin.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import com.example.eserciziologin.ui.ComuniAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView

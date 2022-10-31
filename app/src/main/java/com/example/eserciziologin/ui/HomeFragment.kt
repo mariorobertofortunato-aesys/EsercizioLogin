@@ -1,28 +1,35 @@
 package com.example.eserciziologin.ui
 
-import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.annotation.MenuRes
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.*
-import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.View.OnTouchListener
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.widget.PopupMenu
-import androidx.core.view.isVisible
-import androidx.core.view.iterator
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ItemAnimator
 import com.example.eserciziologin.R
 import com.example.eserciziologin.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -31,36 +38,41 @@ class HomeFragment : Fragment() {
     private val viewModel by viewModels<ViewModel>()
     private lateinit var searchString: String
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_home, container, false)
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-
         /** RV */
-        val adapter = ComuniAdapter(ComuniAdapter.OnClickListener {
-            findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailFragment(
-                    it
-                )
-            )
+        val comuniadapter = ComuniAdapter(ComuniAdapter.OnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(it))
         })
-        binding.recyclerView.adapter = adapter
+
+
+
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(activity)
+            adapter = comuniadapter
+            itemAnimator = null
+        }
 
         viewModel.listaComuni.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+            comuniadapter.submitList(it)
+
+          lifecycleScope.launch {
+              delay(5000)
+              binding.recyclerView.smoothScrollToPosition(0)
+          }
+
         }
 
         /** SEARCHBAR */
@@ -71,52 +83,35 @@ class HomeFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
                 searchString = p0.toString()
                 viewModel.getSearchedComune(searchString)
-                binding.recyclerView.layoutManager!!.scrollToPosition(0)
             }
         })
-
-        /** FAB (Hiding or showing on RV scroll) */
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0 || dy < 0 && binding.searchFab.isShown) {
-                    binding.searchFab.alpha = 0.5f
-                    binding.searchFab.animate()
-                        .alpha(1f)
-                        .translationY(binding.searchFab.height + 16f)
-                        .setDuration(1000)
-                        .setInterpolator(AccelerateInterpolator(2f))
-                        .start()
-                    binding.searchFab.hide()
+        // Searchbar expander
+        binding.searchEdit.setOnTouchListener { _, motionEvent ->
+            when (motionEvent.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    animateWidth(binding.cerca, binding.cerca.width, ((binding.cerca.parent as View).width) - 24)
                 }
             }
-
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    binding.searchFab.alpha = 0.5f
-                    binding.searchFab.animate()
-                        .alpha(1f)
-                        .translationY(-1f)
-                        .setDuration(1000)
-                        .setInterpolator(DecelerateInterpolator(2f))
-                        .start()
-                    binding.searchFab.show()
-                }
-                super.onScrollStateChanged(recyclerView, newState)
-            }
-        })
-
-        /** TODO questo va controllato */
-        binding.searchFab.setOnClickListener {
-            binding.searchEdit.isVisible = true
-            binding.searchFab.text = ""
-
-            animateWidth(
-                binding.searchFab,
-                binding.searchFab.width,
-                ((binding.searchFab.parent as View).width) - 24
-            )
+            false
         }
+        // Hiding animation
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0 || dy < 0 && binding.cerca.isShown) {
+                    binding.cerca.alpha = 0f
+                    binding.cerca.animate().alpha(1f).setDuration(1000).start()
+                }
+            }
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    binding.cerca.alpha = 0f
+                    binding.cerca.animate().alpha(1f).setDuration(1000).start()
+                }
+
+            }
+        })
+
 
         /** TOP RIGHT MENU*/
         binding.topRightHeaderImg.setOnClickListener {
@@ -126,6 +121,8 @@ class HomeFragment : Fragment() {
 
     }
 
+
+    /** MENU METHOD (Show & Listen) */
     private fun showMenu(v: View, @MenuRes menuRes: Int) {
 
         val popup = PopupMenu(requireContext(), v)
@@ -142,22 +139,32 @@ class HomeFragment : Fragment() {
 
         popup.setOnMenuItemClickListener { menuItem: MenuItem ->
 
-            if (menuItem.title == "Filtra per: Regione") {
-                popup.setOnMenuItemClickListener {
-                    viewModel.regioneSelected = it.title.toString()
-                    viewModel.getComuniFromRegione()
-                    return@setOnMenuItemClickListener true
+            when (menuItem.title) {
+                "Filtra per: Regione" -> {
+                    popup.setOnMenuItemClickListener {
+                        viewModel.regioneSelected = it.title.toString()
+                        viewModel.getComuniFromRegione()
+                        viewModel.getProvinceFromRegione()
+                        return@setOnMenuItemClickListener true
+                    }
                 }
-            } else {
-                popup.setOnMenuItemClickListener {
-                    viewModel.provinciaSelected = it.title.toString()
-                    viewModel.getComuniFromProvincia()
+                "Filtra per: Provincia" -> {
+                    popup.setOnMenuItemClickListener {
+                        viewModel.provinciaSelected = it.title.toString()
+                        viewModel.getComuniFromProvincia()
+                        return@setOnMenuItemClickListener true
+                    }
+                }
+                // Filter Reset
+                else -> {
+                    viewModel.loadComuni()
+                    viewModel.getProvince()
+
                     return@setOnMenuItemClickListener true
                 }
             }
             return@setOnMenuItemClickListener true
         }
-
 
         popup.setOnDismissListener {
             // Respond to popup being dismissed.
@@ -167,9 +174,11 @@ class HomeFragment : Fragment() {
     }
 
 
+    /** ANIMATION */
     private fun animateWidth(view: View, startWidth: Int, endWidth: Int) {
-        val widthAnimator = ValueAnimator.ofInt(startWidth, endWidth).setDuration(500)
-        widthAnimator.repeatMode = ObjectAnimator.RESTART
+
+        val widthAnimator = ValueAnimator.ofInt(startWidth, endWidth).setDuration(1250)
+        widthAnimator.repeatMode = ValueAnimator.RESTART
 
         widthAnimator.addUpdateListener {
             val value: Int = widthAnimator.animatedValue as Int
@@ -181,6 +190,7 @@ class HomeFragment : Fragment() {
 
 
 }
+
 
 
 

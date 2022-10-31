@@ -11,6 +11,14 @@
         <item name="strokeWidth">1dp</item>
     </style>
 
+    <!-- TextInput -->
+    <style name="TextInputLayoutAppearance" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="colorControlNormal">@color/secondaryTextColor</item>
+        <item name="colorControlActivated">@color/secondaryTextColor</item>
+        <item name="colorControlHighlight">@color/secondaryTextColor</item>
+        <item name="colorAccent">@color/secondaryTextColor</item>
+    </style>
+
     <!-- Headline Huge -->
     <style name="HeadlineHuge" parent="@style/Overline">
         <item name="android:textSize">32sp</item>

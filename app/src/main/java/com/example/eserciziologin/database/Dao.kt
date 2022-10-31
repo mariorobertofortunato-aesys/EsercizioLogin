@@ -18,10 +18,10 @@ interface Dao {
     @Query("SELECT * FROM comuni_db WHERE nome = (:nome)")
     suspend fun getComune(nome: String) : ComuneDB
 
-    @Query ("SELECT * FROM comuni_db WHERE provinciaNome = (:provinciaSelected)")
+    @Query ("SELECT * FROM comuni_db WHERE provinciaNome = (:provinciaSelected) ORDER BY nome ASC")
     suspend fun getComuniFromProvincia(provinciaSelected: String): List<ComuneDB>
 
-    @Query ("SELECT * FROM comuni_db WHERE regioneNome = (:regioneSelected)")
+    @Query ("SELECT * FROM comuni_db WHERE regioneNome = (:regioneSelected) ORDER BY nome ASC")
     suspend fun getComuniFromRegione(regioneSelected: String): List<ComuneDB>
 
 
