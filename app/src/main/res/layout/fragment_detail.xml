@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="comune"
             type="com.example.eserciziologin.model.Comune" />
@@ -11,107 +12,309 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_constraint_account"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".DetailFragment">
 
-
-        <androidx.cardview.widget.CardView
-            style="@style/CardViewStyle"
-            android:textAlignment="center"
+        <!-- HEADER -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header_constraint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/primaryColor"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/top_left_header_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_start_margin"
+                android:layout_marginTop="@dimen/default_top_margin"
+                android:layout_marginBottom="@dimen/default_bottom_margin"
+                android:src="@drawable/ic_baseline_question_mark_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/primaryTextColor" />
+
+            <TextView
+                android:id="@+id/header_title"
+                style="@style/HeadlineBig"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DETTAGLIO CITTA'"
+                android:textColor="@color/primaryTextColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/top_right_header_img"
+                app:layout_constraintStart_toEndOf="@+id/top_left_header_img"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/top_right_header_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_top_margin"
+                android:layout_marginEnd="@dimen/default_end_margin"
+                android:layout_marginBottom="@dimen/default_bottom_margin"
+                android:src="@drawable/ic_baseline_settings_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/primaryTextColor" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- CARD VIEW -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/CardViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_constraint">
+
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card_view_constraint"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/nome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@{comune.nome}"/>
-        <TextView
-            android:id="@+id/istat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nome"
-            app:layout_constraintBottom_toTopOf="@+id/zona"
-            android:text="@{comune.istat}"/>
-        <TextView
-            android:id="@+id/zona"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/istat"
-            app:layout_constraintBottom_toTopOf="@+id/regione"
-            android:text="@{comune.zonaNome}"/>
-        <TextView
-            android:id="@+id/regione"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/zona"
-            app:layout_constraintBottom_toTopOf="@+id/provincia"
-            android:text="@{comune.regioneNome}"/>
-        <TextView
-            android:id="@+id/provincia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/regione"
-            app:layout_constraintBottom_toTopOf="@+id/sigla"
-            android:text="@{comune.provinciaNome}"/>
-        <TextView
-            android:id="@+id/sigla"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/provincia"
-            app:layout_constraintBottom_toTopOf="@+id/codice_catastale"
-            android:text="@{comune.sigla}"/>
-        <TextView
-            android:id="@+id/codice_catastale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sigla"
-            app:layout_constraintBottom_toTopOf="@+id/cap"
-            android:text="@{comune.codiceCatastale}"/>
-        <TextView
-            android:id="@+id/cap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/codice_catastale"
-            app:layout_constraintBottom_toTopOf="@+id/popolazione"
-            android:text="@{comune.cap}"/>
-        <TextView
-            android:id="@+id/popolazione"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cap"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@{Integer.toString(comune.popolazione)}"/>
+                <TextView
+                    android:id="@+id/nome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@{comune.nome}"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/HeadlineHuge"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- DIVIDER -->
+                <View
+                    android:id="@+id/detail_card_view_divider"
+                    android:layout_width="330dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/default_view_layout_margin"
+                    android:layout_marginBottom="@dimen/default_view_layout_margin"
+                    android:background="@color/primaryLightColor"
+                    android:elevation="8dp"
+                    app:layout_constraintBottom_toTopOf="@+id/city_img"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nome"/>
+
+                <ImageView
+                    android:id="@+id/city_img"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/ic_launcher_foreground"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_card_view_divider"
+                    app:tint="@color/primaryColor" />
+
+                <!-- LABELS CONSTRAINT -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/labels_constraint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/city_img"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_card_view_divider">
+
+                    <TextView
+                        android:id="@+id/istat_label"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Codice Istat"
+                        app:layout_constraintBottom_toTopOf="@+id/zona_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/zona_label"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Zona"
+                        app:layout_constraintBottom_toTopOf="@+id/regione_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/istat_label" />
+
+                    <TextView
+                        android:id="@+id/regione_label"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Regione"
+                        app:layout_constraintBottom_toTopOf="@+id/provincia_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/zona_label" />
+
+                    <TextView
+                        android:id="@+id/provincia_label"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Provincia"
+                        app:layout_constraintBottom_toTopOf="@+id/sigla_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/regione_label" />
+
+                    <TextView
+                        android:id="@+id/sigla_label"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sigla Auto"
+                        app:layout_constraintBottom_toTopOf="@+id/codice_catastale_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/provincia_label" />
+
+                    <TextView
+                        android:id="@+id/codice_catastale_label"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Codice Catastale"
+                        app:layout_constraintBottom_toTopOf="@+id/cap_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/sigla_label" />
+
+                    <TextView
+                        android:id="@+id/cap_label"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CAP"
+                        app:layout_constraintBottom_toTopOf="@+id/popolazione_label"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/codice_catastale_label" />
+
+                    <TextView
+                        android:id="@+id/popolazione_label"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Abitanti"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cap_label" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- DATA CONSTRAINT -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/data_constraint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/labels_constraint"
+                    app:layout_constraintTop_toBottomOf="@+id/detail_card_view_divider"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/istat"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{comune.istat}"
+                        app:layout_constraintBottom_toTopOf="@+id/zona"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/zona"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{comune.zonaNome}"
+                        app:layout_constraintBottom_toTopOf="@+id/regione"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/istat" />
+
+                    <TextView
+                        android:id="@+id/regione"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{comune.regioneNome}"
+                        app:layout_constraintBottom_toTopOf="@+id/provincia"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/zona" />
+
+                    <TextView
+                        android:id="@+id/provincia"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{comune.provinciaNome}"
+                        app:layout_constraintBottom_toTopOf="@+id/sigla"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/regione" />
+
+                    <TextView
+                        android:id="@+id/sigla"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{comune.sigla}"
+                        app:layout_constraintBottom_toTopOf="@+id/codice_catastale"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/provincia" />
+
+                    <TextView
+                        android:id="@+id/codice_catastale"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{comune.codiceCatastale}"
+                        app:layout_constraintBottom_toTopOf="@+id/cap"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/sigla" />
+
+                    <TextView
+                        android:id="@+id/cap"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{comune.cap}"
+                        app:layout_constraintBottom_toTopOf="@+id/popolazione"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/codice_catastale" />
+
+                    <TextView
+                        android:id="@+id/popolazione"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{Integer.toString(comune.popolazione)}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cap" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.cardview.widget.CardView>
-
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

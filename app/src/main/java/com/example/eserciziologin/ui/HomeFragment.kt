@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
 
           lifecycleScope.launch {
               delay(5000)
-              binding.recyclerView.smoothScrollToPosition(0)
+              binding.recyclerView.scrollToPosition(0)
           }
 
         }
