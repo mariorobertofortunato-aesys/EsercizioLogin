@@ -77,6 +77,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.0.0')
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    // Firebase database
+    implementation('com.google.firebase:firebase-database:20.1.0')
 
     // Room for simple persistence with an ORM
     implementation("androidx.room:room-runtime:2.4.3")

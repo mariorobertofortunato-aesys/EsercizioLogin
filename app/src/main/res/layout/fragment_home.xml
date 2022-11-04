@@ -88,6 +88,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/next_destination_label" />
 
+            <!-- CERCA -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/cerca"
                 style="@style/TextInputLayoutAppearance"
@@ -127,8 +128,6 @@
 
                     />
             </com.google.android.material.textfield.TextInputLayout>
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

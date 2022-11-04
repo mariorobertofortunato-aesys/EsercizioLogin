@@ -57,8 +57,6 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment(it))
         })
 
-
-
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = comuniadapter

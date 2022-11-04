@@ -12,8 +12,8 @@ class MainRepository @Inject constructor (private val databaseRepository: DBRepo
     /** COMUNI */
     suspend fun refreshComuniInDB() {
         try {
-            val networkRensponse = networkRepository.getAll()
-            val comuniFromNetwork = parseComuniJsonResult(networkRensponse)
+            val networkResponse = networkRepository.getAll()
+            val comuniFromNetwork = parseComuniJsonResult(networkResponse)
             databaseRepository.insertAll(comuniFromNetwork.asDBModel())
         } catch (e: Exception) {
         }
